@@ -23,7 +23,7 @@
     "prettier": "prettier --write '**/src/**/*.{js,css}'",
     "precommit": "lint-staged",
     "prepush": "npm run lint",
-    "publish": "npm run build && npm publish"
+    "prepublish": "npm run build"
   },
   "lint-staged": {
     "src/**/*.js": [

@@ -31,6 +31,8 @@ import Stickyard from 'stickyard'
 </Stickyard>
 ```
 
+Learn more at [https://nihgwu.github.io/stickyard/](https://nihgwu.github.io/stickyard/)
+
 ## License
 
 MIT © [Neo](https://github.com/nihgwu)

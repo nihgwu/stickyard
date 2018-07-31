@@ -2,11 +2,12 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nihgwu.github.io/stickyard/",
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "stickyard": "../../stickyard/",
+    "stickyard": "^0.0.1",
     "styled-components": "^3.3.3"
   },
   "scripts": {
@@ -17,6 +18,7 @@
     "deploy": "rimraf build && npm run build && gh-pages -d build"
   },
   "devDependencies": {
+    "gh-pages": "^1.2.0",
     "rimraf": "^2.6.2"
   }
 }
