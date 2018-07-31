@@ -1,0 +1,14 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false,
+      "loose": true
+    }],
+    "stage-0",
+    "react"
+  ],
+  "plugins": [
+    "annotate-pure-calls",
+    "external-helpers"
+  ]
+}

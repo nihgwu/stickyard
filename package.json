@@ -1,0 +1,74 @@
+{
+  "name": "stickyard",
+  "version": "0.0.1",
+  "description": "Make your component sticky the easy way",
+  "repository": "git@github.com:nihgwu/stickyard.git",
+  "author": "Neo <nihgwu@live.com>",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "reactjs",
+    "sticky",
+    "stickyard",
+    "render prop"
+  ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "lint": "eslint 'src/**/*.js'",
+    "prettier": "prettier --write '**/src/**/*.{js,css}'",
+    "precommit": "lint-staged",
+    "prepush": "npm run lint",
+    "publish": "npm run build && npm publish"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --write",
+      "eslint",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
+    "babel-plugin-annotate-pure-calls": "^0.3.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.10.0",
+    "gh-pages": "^1.2.0",
+    "husky": "^0.14.3",
+    "jest": "^23.4.2",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.14.0",
+    "react": "^16.4.1",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.63.4",
+    "rollup-plugin-babel": "^3.0.7",
+    "rollup-plugin-commonjs": "^9.1.4",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-url": "^1.4.0"
+  }
+}
