@@ -16,15 +16,15 @@ npm install --save stickyard
 
 ### children
 
-`function({ registerContainer, registerSticky, getStickyOffsets, scrollToIndex, scrollTo })` | *required*
+`function({})` | *required*
 
-Render whatever you want.
+Render whatever you want, it's called with an object with the following properties:
 
-* `registerContainer`, pass to the container's `ref` prop.
-* `registerSticky`, pass to the `ref` prop of whatever node within the container if you want to make it sticky.
-* `getStickyOffsets`, return the sticky elements' offsets.
-* `scrollToIndex`, scroll to the specific sticky element by index
-* `scrollTo`, scroll to the specific offset
+* `registerContainer(ref)`, pass to the container's `ref` prop.
+* `registerSticky(ref)`, pass to the `ref` prop of whatever node within the container if you want to make it sticky.
+* `getStickyOffsets()`, return the sticky elements' offsets.
+* `scrollToIndex(index)`, scroll to the specific sticky element by index.
+* `scrollTo(offset)`, scroll to the specific offset.
 
 ### stickyClassName
 

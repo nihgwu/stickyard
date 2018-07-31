@@ -31,24 +31,44 @@ const Description = styled('div')`
   margin: 10px;
 `
 
+const Param = styled('div')`
+  font-size: 14px;
+  margin: 10px 0;
+`
+
 export default () => (
   <div>
     <Prop>
       <Name>
         children
-        <Type>{'function({ registerContainer, registerSticky })'}</Type>
+        <Type>{'function({})'}</Type>
         <Required>required</Required>
       </Name>
-      <Description>Render whatever you want, it's called with an object with the following properties</Description>
       <Description>
-        <Type>registerContainer</Type>
-        pass to the container's ref prop
+        Render whatever you want, it's called with an object with the following
+        properties:
       </Description>
-      <Description>
-        <Type>registerSticky</Type>
+      <Param>
+        <Type>registerContainer(ref)</Type>
+        pass to the container's ref prop
+      </Param>
+      <Param>
+        <Type>registerSticky(ref)</Type>
         pass to the `ref` prop of whatever node within the container if you want
         to make it sticky
-      </Description>
+      </Param>
+      <Param>
+        <Type>getStickyOffsets()</Type>
+        return the sticky elements' offsets
+      </Param>
+      <Param>
+        <Type>scrollToIndex(index)</Type>
+        scroll to the specific sticky element by index
+      </Param>
+      <Param>
+        <Type>scrollTo(offset)</Type>
+        scroll to the specific offset
+      </Param>
     </Prop>
     <Prop>
       <Name>
