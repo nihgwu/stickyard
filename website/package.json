@@ -4,11 +4,12 @@
   "private": true,
   "homepage": "https://nihgwu.github.io/stickyard/",
   "dependencies": {
+    "emotion": "^9.2.6",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-emotion": "^9.2.6",
     "react-scripts": "1.1.4",
-    "stickyard": "^0.0.1",
-    "styled-components": "^3.3.3"
+    "stickyard": "^0.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

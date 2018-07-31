@@ -12,6 +12,23 @@ yarn add stickyard
 npm install --save stickyard
 ```
 
+## Props
+
+### children
+
+`function({ registerContainer, registerSticky })` | *required*
+
+Render whatever you want
+
+* `registerContainer`, pass to the container's `ref` prop.
+* `registerSticky`, pass to the `ref` prop of whatever node within the container if you want to make it sticky.
+
+### stickyClassName
+
+`string`
+
+The className to be attached to the element when it's sticky.
+
 ## Usage
 
 ```js
