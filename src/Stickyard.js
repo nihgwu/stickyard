@@ -16,9 +16,13 @@ export default class Stickyard extends React.PureComponent {
     this.setContainerRef = this.setContainerRef.bind(this)
     this.setStickyRef = this.setStickyRef.bind(this)
     this.updateState = this.updateState.bind(this)
+    this.getStickyOffsets = this.getStickyOffsets.bind(this)
+    this.scrollToIndex = this.scrollToIndex.bind(this)
+    this.scrollTo = this.scrollTo.bind(this)
 
     this.container = null
     this.stickers = []
+    this.offsets = []
   }
 
   componentDidMount() {
@@ -51,13 +55,28 @@ export default class Stickyard extends React.PureComponent {
     if (ref) this.stickers.push(ref)
   }
 
+  getStickyOffsets() {
+    return this.offsets
+  }
+
+  scrollTo(offset) {
+    if (this.container) {
+      this.container.scrollTop = offset
+    }
+  }
+
+  scrollToIndex(index) {
+    if (index >= 0 && index < this.offsets.length) {
+      this.scrollTo(this.offsets[index])
+    }
+  }
+
   updateState() {
     if (!this.container || this.stickers.length === 0) return
     const { scrollTop, scrollHeight } = this.container
     const { stickyClassName } = this.props
 
-    const offsets = this.stickers.map(x => x.offsetTop)
-    offsets.push(scrollHeight)
+    const offsets = this.offsets.concat(scrollHeight)
 
     let stickyIndex = 0
     while (scrollTop > offsets[stickyIndex]) stickyIndex += 1
@@ -88,6 +107,7 @@ export default class Stickyard extends React.PureComponent {
     this.stickers = this.stickers
       .filter(x => x && x.offsetHeight)
       .sort((a, b) => a.offsetTop - b.offsetTop)
+    this.offsets = this.stickers.map(x => x.offsetTop)
   }
 
   render() {
@@ -95,6 +115,9 @@ export default class Stickyard extends React.PureComponent {
     return children({
       registerContainer: this.setContainerRef,
       registerSticky: this.setStickyRef,
+      getStickyOffsets: this.getStickyOffsets,
+      scrollToIndex: this.scrollToIndex,
+      scrollTo: this.scrollTo,
     })
   }
 }
