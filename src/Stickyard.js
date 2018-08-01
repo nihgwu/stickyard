@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const translateY = (style, offset) => {
-  style.transform = `translateY(${offset}px`
-  style.WebkitTransform = `translateY(${offset}px`
+const styleTransform = (style, transform) => {
+  style.transform = transform
+  style.WebkitTransform = transform
+}
+
+const styleTranslateY = (style, offset) => {
+  styleTransform(style, `translateY(${offset}px`)
 }
 
 /**
- * Stickyard
+ * Stickyard, make your component sticky the easy way using render prop
  */
 export default class Stickyard extends React.PureComponent {
   constructor(props) {
@@ -22,14 +26,16 @@ export default class Stickyard extends React.PureComponent {
 
     this.container = null
     this.stickers = []
-    this.offsets = []
+    this.lastStickyIndex = -1
+    this.updating = false
   }
 
   componentDidMount() {
     this.purgeStickers()
     this.updateState()
-    this.container &&
+    if (this.container) {
       this.container.addEventListener('scroll', this.updateState)
+    }
   }
 
   componentDidUpdate() {
@@ -37,8 +43,9 @@ export default class Stickyard extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    this.container &&
+    if (this.container) {
       this.container.removeEventListener('scroll', this.updateState)
+    }
   }
 
   setContainerRef(ref) {
@@ -56,7 +63,7 @@ export default class Stickyard extends React.PureComponent {
   }
 
   getStickyOffsets() {
-    return this.offsets
+    return this.stickers.map(x => x.offsetTop)
   }
 
   scrollTo(offset) {
@@ -66,48 +73,61 @@ export default class Stickyard extends React.PureComponent {
   }
 
   scrollToIndex(index) {
-    if (index >= 0 && index < this.offsets.length) {
-      this.scrollTo(this.offsets[index])
+    if (index >= 0 && index < this.getStickyOffsets().length) {
+      this.scrollTo(this.getStickyOffsets()[index])
     }
   }
 
   updateState() {
-    if (!this.container || this.stickers.length === 0) return
-    const { scrollTop, scrollHeight } = this.container
-    const { stickyClassName } = this.props
+    if (this.updating || !this.container || this.stickers.length === 0) return
 
-    const offsets = this.offsets.concat(scrollHeight)
+    this.updating = true
+
+    const { scrollTop, scrollHeight } = this.container
+    const offsets = this.getStickyOffsets().concat(scrollHeight)
 
     let stickyIndex = 0
     while (scrollTop > offsets[stickyIndex]) stickyIndex += 1
     stickyIndex -= 1
 
-    this.stickers.forEach((header, index) => {
-      if (index === stickyIndex) {
-        if (scrollTop < offsets[index + 1] - header.offsetHeight) {
-          translateY(header.style, scrollTop - header.offsetTop)
-        } else {
-          translateY(
-            header.style,
-            offsets[index + 1] - offsets[index] - header.offsetHeight
-          )
-        }
+    const sticker = stickyIndex >= 0 ? this.stickers[stickyIndex] : null
 
-        if (stickyClassName) header.classList.add(stickyClassName)
+    if (sticker) {
+      if (scrollTop < offsets[stickyIndex + 1] - sticker.offsetHeight) {
+        styleTranslateY(sticker.style, scrollTop - sticker.offsetTop)
       } else {
-        header.style.transform = ''
-        header.style.WebkitTransform = ''
-
-        if (stickyClassName) header.classList.remove(stickyClassName)
+        styleTranslateY(
+          sticker.style,
+          offsets[stickyIndex + 1] - offsets[stickyIndex] - sticker.offsetHeight
+        )
       }
-    })
+    }
+
+    const { stickyClassName, onSticky } = this.props
+    if (stickyIndex !== this.lastStickyIndex) {
+      const lastSticker =
+        this.lastStickyIndex >= 0 ? this.stickers[this.lastStickyIndex] : null
+
+      if (lastSticker) styleTransform(lastSticker.style, '')
+
+      if (stickyClassName) {
+        sticker && sticker.classList && sticker.classList.add(stickyClassName)
+        lastSticker &&
+          lastSticker.classList &&
+          lastSticker.classList.remove(stickyClassName)
+      }
+
+      onSticky && onSticky(stickyIndex)
+      this.lastStickyIndex = stickyIndex
+    }
+
+    this.updating = false
   }
 
   purgeStickers() {
     this.stickers = this.stickers
       .filter(x => x && x.offsetHeight)
       .sort((a, b) => a.offsetTop - b.offsetTop)
-    this.offsets = this.stickers.map(x => x.offsetTop)
   }
 
   render() {
@@ -123,6 +143,16 @@ export default class Stickyard extends React.PureComponent {
 }
 
 Stickyard.propTypes = {
+  /**
+   * Render whatever you want, it's called with an object
+   */
   children: PropTypes.func.isRequired,
+  /**
+   * The className to be attached to the element when it's sticky.
+   */
   stickyClassName: PropTypes.string,
+  /**
+   * It's called when a element becomes sticky, `-1` means there is no sticky element.
+   */
+  onSticky: PropTypes.func,
 }

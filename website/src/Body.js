@@ -64,13 +64,13 @@ const usage = `import Stickyard from 'stickyard'
 // pseudo code
 <Stickyard>
   {({ registerContainer, registerSticky }) => (
-    <ul ref={registerContainer}>
+    <div ref={registerContainer}>
       {items.map((item, index) => (
-        <li key={item.key} ref={item.sticky ? registerSticky : null}>
+        <div key={item.key} ref={item.sticky ? registerSticky : null}>
           {item.label}
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   )}
 </Stickyard>`
 

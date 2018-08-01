@@ -18,7 +18,7 @@ const Type = styled('span')`
   color: #333;
 `
 
-const Required = styled('span')`
+const Tag = styled('span')`
   font-size: 13px;
   padding: 1px 5px;
   border-radius: 2px;
@@ -42,7 +42,7 @@ export default () => (
       <Name>
         children
         <Type>{'function({})'}</Type>
-        <Required>required</Required>
+        <Tag>required</Tag>
       </Name>
       <Description>
         Render whatever you want, it's called with an object with the following
@@ -50,12 +50,12 @@ export default () => (
       </Description>
       <Param>
         <Type>registerContainer(ref)</Type>
-        pass to the container's ref prop
+        pass to the container's <Tag>ref</Tag> prop
       </Param>
       <Param>
         <Type>registerSticky(ref)</Type>
-        pass to the `ref` prop of whatever node within the container if you want
-        to make it sticky
+        pass to the <Tag>ref</Tag> prop of whatever node within the container if
+        you want to make it sticky
       </Param>
       <Param>
         <Type>getStickyOffsets()</Type>
@@ -77,6 +77,16 @@ export default () => (
       </Name>
       <Description>
         The className to be attached to the element when it's sticky
+      </Description>
+    </Prop>
+    <Prop>
+      <Name>
+        onSticky
+        <Type>function(index)</Type>
+      </Name>
+      <Description>
+        It's called when a element becomes sticky, <Tag>-1</Tag> means there is
+        no sticky element
       </Description>
     </Prop>
   </div>
