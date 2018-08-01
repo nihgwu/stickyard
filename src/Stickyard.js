@@ -32,7 +32,6 @@ export default class Stickyard extends React.PureComponent {
 
   componentDidMount() {
     this.purgeStickers()
-    this.updateState()
     if (this.container) {
       this.container.addEventListener('scroll', this.updateState)
     }
@@ -128,6 +127,8 @@ export default class Stickyard extends React.PureComponent {
     this.stickers = this.stickers
       .filter(x => x && x.offsetHeight)
       .sort((a, b) => a.offsetTop - b.offsetTop)
+
+    this.updateState()
   }
 
   render() {
