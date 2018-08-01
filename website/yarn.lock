@@ -6500,9 +6500,9 @@ statuses@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
 
-stickyard@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/stickyard/-/stickyard-0.0.2.tgz#d37ada3a5e69a1a34500cd68c63c208b7756a699"
+stickyard@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/stickyard/-/stickyard-0.0.3.tgz#33cc2efc5f67c817c3f2659bca19f7ab9b21939d"
   dependencies:
     prop-types "^15.6.0"
 
