@@ -58,6 +58,10 @@ export default () => (
         you want to make it sticky
       </Param>
       <Param>
+        <Type>updateState()</Type>
+        update the sticky state manually, this useful if your content is resizable
+      </Param>
+      <Param>
         <Type>getStickyOffsets()</Type>
         return the sticky elements' offsets
       </Param>

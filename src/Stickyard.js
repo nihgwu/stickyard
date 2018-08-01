@@ -135,6 +135,7 @@ export default class Stickyard extends React.PureComponent {
     return children({
       registerContainer: this.setContainerRef,
       registerSticky: this.setStickyRef,
+      updateState: this.updateState,
       getStickyOffsets: this.getStickyOffsets,
       scrollToIndex: this.scrollToIndex,
       scrollTo: this.scrollTo,
