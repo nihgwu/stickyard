@@ -86,7 +86,7 @@ export default class Stickyard extends React.PureComponent {
     const offsets = this.getStickyOffsets().concat(scrollHeight)
 
     let stickyIndex = 0
-    while (scrollTop > offsets[stickyIndex]) stickyIndex += 1
+    while (scrollTop >= offsets[stickyIndex]) stickyIndex += 1
     stickyIndex -= 1
 
     const sticker = stickyIndex >= 0 ? this.stickers[stickyIndex] : null

@@ -7,10 +7,10 @@
   "license": "MIT",
   "keywords": [
     "react",
-    "reactjs",
+    "component",
     "sticky",
     "stickyard",
-    "render prop"
+    "render-prop"
   ],
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
