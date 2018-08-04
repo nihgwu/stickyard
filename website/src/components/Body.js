@@ -4,23 +4,13 @@ import Stickyard from 'stickyard'
 
 import Props from './Props'
 
-const Container = styled('div')`
-  margin: 20px auto;
-  max-width: 900px;
-  height: calc(100vh - 100px);
-  overflow: auto;
-  background-color: #f5f5f5;
-  box-shadow: 1px 1px 4px #ccc, -1px -1px 4px #ccc;
+const Container = styled.div`
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
 `
 
-const Item = styled('div')`
-  height: 50px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-`
-
-const Header = styled('div')`
+const Header = styled.div`
   height: ${props => Math.ceil(Math.random() * 30) + 50}px;
   background-color: #ccc;
   display: flex;
@@ -30,11 +20,18 @@ const Header = styled('div')`
   font-size: 18px;
 `
 
+const Item = styled.div`
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+`
+
 const stickyStyle = css`
   box-shadow: 0 1px 4px #888;
 `
 
-const Intro = styled('div')`
+const Intro = styled.div`
   font-weight: 500;
   height: 200px;
   padding: 20px;
@@ -44,7 +41,7 @@ const Intro = styled('div')`
   justify-content: center;
 `
 
-const Pre = styled('pre')`
+const Pre = styled.pre`
   margin: 0;
   padding: 20px;
   background-color: #333;

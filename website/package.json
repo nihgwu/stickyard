@@ -3,20 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://nihgwu.github.io/stickyard/",
+  "scripts": {
+    "start": "gatsby develop",
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "deploy": "rimraf .cache public && gatsby build && gh-pages -d public",
+    "format": "prettier --write '**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
+    "common-tags": "^1.8.0",
     "emotion": "^9.2.6",
+    "emotion-server": "^9.2.6",
+    "gatsby": "next",
+    "gatsby-plugin-emotion": "next",
+    "gatsby-plugin-react-helmet": "next",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-emotion": "^9.2.6",
-    "react-scripts": "1.1.4",
-    "stickyard": "^0.0.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "rimraf build && npm run build && gh-pages -d build"
+    "react-helmet": "^5.2.0"
   },
   "devDependencies": {
     "gh-pages": "^1.2.0",
