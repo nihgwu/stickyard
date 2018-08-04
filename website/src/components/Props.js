@@ -37,11 +37,15 @@ const Param = styled.div`
 `
 
 const Note = styled.div`
-  opacity: 0.6;
-  background-color: #ccc;
+  background-color: #ddd;
   padding: 10px;
   border-radius: 2px;
+  color: #333;
   font-size: 14px;
+
+  ${Tag} {
+    background-color: #888;
+  }
 `
 
 export default () => (
