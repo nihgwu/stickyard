@@ -8,7 +8,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "deploy": "rimraf .cache public && gatsby build && gh-pages -d public",
+    "deploy": "rimraf .cache public && gatsby build --prefix-paths && gh-pages -d public",
     "format": "prettier --write '**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
