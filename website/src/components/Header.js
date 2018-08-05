@@ -34,7 +34,7 @@ const Header = () => (
   <Container>
     <Nav>
       <Title>
-        <Link href="/">Stickyard</Link>
+        <Link href="https://nihgwu.github.io/stickyard/">Stickyard</Link>
       </Title>
       <Link href="https://github.com/nihgwu/stickyard">Github</Link>
     </Nav>
