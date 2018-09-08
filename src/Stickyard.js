@@ -7,7 +7,7 @@ const styleTransform = (style, transform) => {
 }
 
 const styleTranslateY = (style, offset) => {
-  styleTransform(style, `translateY(${offset}px`)
+  styleTransform(style, `translateY(${offset}px) translateZ(0)`)
 }
 
 /**
