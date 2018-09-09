@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["/stickyard/app-20892a7fad8577e31291.js","4f50655275f7c15813a07f911d78d488"],["/stickyard/component---node-modules-gatsby-plugin-offline-app-shell-js-abadfb32a4ecdb96fafd.js","2070f0f9800c20ebddd7c3395977fb0e"],["/stickyard/index.html","3d1226dc3f74a60ff32fb5c182dcf62d"],["/stickyard/offline-plugin-app-shell-fallback/index.html","f83a64ba89bd5bdfd734b0b679ae6ba6"],["/stickyard/webpack-runtime-ea42d35cdd366ec236ea.js","e52a7039585d9237d3b87cca121c777c"]];
+var precacheConfig = [["/stickyard/app-24e648b098e004525acb.js","1b17aeec56f4c4e0ff9bcdf3bf0a9607"],["/stickyard/component---node-modules-gatsby-plugin-offline-app-shell-js-3ece56e7c69fbea1d3d3.js","d3929bc866d8c3b1085c2ac4775a3284"],["/stickyard/index.html","3c17d54a58405204fe68c2f600c6ff1b"],["/stickyard/offline-plugin-app-shell-fallback/index.html","1b705269f6cfeb2a29c35b5a8c1d2a84"],["/stickyard/webpack-runtime-e1f7237ca4845eaaade6.js","affd217d6f2caeb7916143e4ab11cf61"]];
 var cacheName = 'sw-precache-v3-gatsby-plugin-offline-' + (self.registration ? self.registration.scope : '');
 
 
@@ -98,7 +98,7 @@ var isPathWhitelisted = function (whitelist, absoluteUrlString) {
     }
 
     // Otherwise compare each path regex to the path of the URL passed in.
-    var path = (new URL(absoluteUrlString)).pathname;
+    var url = new URL(absoluteUrlString), path = url.pathname + url.search;
     return whitelist.some(function(whitelistedPathRegex) {
       return path.match(whitelistedPathRegex);
     });
@@ -233,7 +233,7 @@ self.addEventListener('fetch', function(event) {
     if (!shouldRespond &&
         navigateFallback &&
         (event.request.mode === 'navigate') &&
-        isPathWhitelisted(["^.*([^.]{5}|.html)$"], event.request.url)) {
+        isPathWhitelisted(["^.*([^.]{5}|.html)(?<!(\\?|&)no-cache=1)$"], event.request.url)) {
       url = new URL(navigateFallback, self.location).toString();
       shouldRespond = urlsToCacheKeys.has(url);
     }
@@ -285,7 +285,7 @@ self.addEventListener('fetch', function(event) {
 
 // Runtime cache configuration, using the sw-toolbox library.
 
-toolbox.router.get(/\.(?:png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2)$/, toolbox.fastest, {});
+toolbox.router.get(/\.(?:png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2|json|css)$/, toolbox.fastest, {});
 
 
 
