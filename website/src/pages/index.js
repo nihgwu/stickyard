@@ -92,19 +92,21 @@ const Home = () => (
               </Stickyard>
             `}
           </Code>
-          <Header innerRef={registerSticky}>Demo</Header>
-          {items.map((item, index) => {
-            const sticky = index !== 0 && index % 5 === 0
-            return (
-              <Item
-                key={index}
-                sticky={sticky}
-                innerRef={sticky ? registerSticky : null}
-              >
-                {item}
-              </Item>
-            )
-          })}
+          <div style={{ position: 'relative' }}>
+            <Header innerRef={registerSticky}>Demo</Header>
+            {items.map((item, index) => {
+              const sticky = index !== 0 && index % 5 === 0
+              return (
+                <Item
+                  key={index}
+                  sticky={sticky}
+                  innerRef={sticky ? registerSticky : null}
+                >
+                  {item}
+                </Item>
+              )
+            })}
+          </div>
         </Container>
       )}
     </Stickyard>

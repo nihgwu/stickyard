@@ -20,6 +20,7 @@ export default class Stickyard extends React.PureComponent {
     this.setContainerRef = this.setContainerRef.bind(this)
     this.setStickyRef = this.setStickyRef.bind(this)
     this.updateState = this.updateState.bind(this)
+    this.getStickyOffset = this.getStickyOffset.bind(this)
     this.getStickyOffsets = this.getStickyOffsets.bind(this)
     this.scrollToIndex = this.scrollToIndex.bind(this)
     this.scrollTo = this.scrollTo.bind(this)
@@ -50,10 +51,13 @@ export default class Stickyard extends React.PureComponent {
   setContainerRef(ref) {
     this.container = ref
     if (ref) {
-      ref.style.position = 'relative'
+      // the postion should be either `relative` or `absolute`
+      if (ref.style.position !== 'absolute') {
+        ref.style.position = 'relative'
+      }
+      ref.style.overflowY = 'auto'
       ref.style.willChange = 'transform'
       ref.style.WebkitOverflowScrolling = 'touch'
-      ref.style.overflow = 'auto'
     }
   }
 
@@ -61,8 +65,18 @@ export default class Stickyard extends React.PureComponent {
     if (ref) this.stickers.push(ref)
   }
 
+  getStickyOffset(sticker) {
+    let { offsetTop, offsetParent } = sticker
+    while (this.container && offsetParent !== this.container) {
+      offsetTop += offsetParent.offsetTop
+      // eslint-disable-next-line prefer-destructuring
+      offsetParent = offsetParent.offsetParent
+    }
+    return offsetTop
+  }
+
   getStickyOffsets() {
-    return this.stickers.map(x => x.offsetTop)
+    return this.stickers.map(this.getStickyOffset)
   }
 
   scrollTo(offset) {
@@ -93,7 +107,7 @@ export default class Stickyard extends React.PureComponent {
 
     if (sticker) {
       if (scrollTop < offsets[stickyIndex + 1] - sticker.offsetHeight) {
-        styleTranslateY(sticker.style, scrollTop - sticker.offsetTop)
+        styleTranslateY(sticker.style, scrollTop - offsets[stickyIndex])
       } else {
         styleTranslateY(
           sticker.style,
@@ -125,8 +139,8 @@ export default class Stickyard extends React.PureComponent {
 
   purgeStickers() {
     this.stickers = this.stickers
-      .filter(x => x && x.offsetHeight)
-      .sort((a, b) => a.offsetTop - b.offsetTop)
+      .filter(sticker => sticker && sticker.offsetHeight)
+      .sort((a, b) => this.getStickyOffset(a) - this.getStickyOffset(b))
 
     this.updateState()
   }
